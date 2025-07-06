@@ -18,7 +18,7 @@ function Header({ onMenuClick }) {
       </h1>
 
       {/* Right Section */}
-      <div className="flex items-center gap-4 sm:gap-6">
+      <div className="flex items-center gap-4">
         {/* Notification Icon */}
         <button
           type="button"
@@ -30,11 +30,15 @@ function Header({ onMenuClick }) {
         </button>
 
         {/* User Avatar + Chevron (hidden on mobile) */}
-        <div className="hidden sm:flex items-center gap-2 cursor-pointer">
-          <div className="w-9 h-9 bg-gray-200 text-gray-800 font-semibold rounded-full flex items-center justify-center text-md shadow-inner">
-            V
+        <div className="hidden sm:flex items-center cursor-pointer">
+          <div className="p-2 rounded-2xl hover:bg-gray-100">
+            <div className="w-9 h-9 bg-yellow-200 text-gray-800 font-semibold rounded-full flex items-center justify-center text-md shadow-inner">
+              V
+            </div>
           </div>
-          <ChevronDown className="w-6 h-6 text-gray-600 transition-colors" />
+          <div className="hover:bg-gray-100 rounded-md p-1">
+            <ChevronDown className="w-4 h-4 text-gray-800 transition-colors" />
+          </div>
         </div>
       </div>
     </header>

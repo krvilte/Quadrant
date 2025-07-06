@@ -1,5 +1,6 @@
 import React from "react";
 import { House, Grid2x2, Settings, User, LogOut } from "lucide-react";
+import { NavLink } from "react-router";
 
 const menuItems = [
   { icon: <House className="w-6 h-6" />, text: "Home", path: "/" },
@@ -25,12 +26,13 @@ function Sidebar() {
 
         <div className="flex flex-col gap-5">
           {menuItems.map((item, index) => (
-            <div
+            <NavLink
+              to={item.path}
               key={index}
               className="p-3 rounded-2xl text-gray-800 hover:bg-gray-100 transition-colors cursor-pointer"
             >
               {item.icon}
-            </div>
+            </NavLink>
           ))}
         </div>
       </div>

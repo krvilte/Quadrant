@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
-import { Outlet } from "react-router";
 import Sidebar from "./Sidebar";
+import { Outlet } from "react-router";
 
 function AppLayout() {
   return (
@@ -17,7 +17,7 @@ function AppLayout() {
         <Header />
 
         {/* Main Content Area */}
-        <main className="flex-1 rounded-tl-lg overflow-y-auto overflow-x-hidden p-6 bg-gray-50">
+        <main className="flex-1 rounded-tl-lg overflow-y-auto overflow-x-hidden px-6 bg-gray-50">
           <Outlet />
         </main>
       </div>
