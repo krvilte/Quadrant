@@ -19,9 +19,11 @@ function Sidebar() {
       {/* Top: Main navigation */}
       <div className="flex flex-col items-center gap-2">
         <div className="mb-6 hover:bg-gray-100 p-3 rounded-2xl">
-          <div className="flex items-center justify-center text-gray-100 bg-blue-400 w-6 h-6 rounded-full text-xl font-bold font-mono italic cursor-pointer select-none">
-            Q
-          </div>
+          <NavLink to={"/"}>
+            <div className="flex items-center justify-center text-gray-100 bg-blue-400 w-6 h-6 rounded-full text-xl font-bold font-mono italic cursor-pointer select-none">
+              Q
+            </div>
+          </NavLink>
         </div>
 
         <div className="flex flex-col gap-5">

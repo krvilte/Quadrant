@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Bell, ChevronDown, Menu } from "lucide-react";
+import { useLocation } from "react-router";
 
 function Header({ onMenuClick }) {
+  const location = useLocation();
+
+  const pageTitle = useMemo(() => {
+    if (location.pathname === "/") return "Home";
+    if (location.pathname.includes("matrix")) return "Matrix";
+    if (location.pathname.includes("settings")) return "Settings";
+    if (location.pathname.includes("user")) return "User";
+  }, [location.pathname]);
+
   return (
     <header className="flex justify-between items-center px-4 py-3 bg-gray-50 sm:px-6">
       <button
@@ -14,7 +24,7 @@ function Header({ onMenuClick }) {
 
       {/* Page Title */}
       <h1 className="text-lg sm:text-xl font-sans font-semibold text-gray-800">
-        Dashboard
+        {pageTitle}
       </h1>
 
       {/* Right Section */}
