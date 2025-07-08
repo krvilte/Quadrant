@@ -16,7 +16,7 @@ function Header({ onMenuClick }) {
     <header className="flex justify-between items-center px-4 py-3 bg-gray-50 sm:px-6">
       <button
         onClick={onMenuClick}
-        className="sm:hidden text-gray-800 p-3 rounded-2xl hover:bg-gray-100 transition-colors cursor-pointer"
+        className="lg:hidden text-gray-800 p-3 rounded-2xl hover:bg-gray-100 transition-colors cursor-pointer"
         aria-label="Toggle Sidebar"
       >
         <Menu className="w-6 h-6" />
