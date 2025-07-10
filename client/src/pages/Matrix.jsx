@@ -1,9 +1,10 @@
 import React from "react";
+import ActionCards from "../components/ActionCards";
 
 function Matrix() {
   return (
-    <div className="text-gray-800 text-xl font-semibold">
-      This is the Matrix Page
+    <div className="p-6 text-gray-800">
+      <ActionCards />
     </div>
   );
 }
