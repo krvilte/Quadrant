@@ -1,12 +1,12 @@
 import React from "react";
-import { Plus } from "lucide-react";
+import TaskItem from "./TaskItem";
 
 function Quadrant({ status, title, icon }) {
   return (
-    <div className="p-4 bg-white border border-gray-100 rounded-lg">
-      <div className="flex flex-col items-start mb-6">
+    <div className="bg-white border-gray-100 border p-4 rounded-lg">
+      <div className="flex flex-col items-start gap-3">
         {/* Header */}
-        <div className="flex gap-2 items-center w-full py-2 mb-4">
+        <div className="flex gap-2 items-center w-full">
           {icon}
           <h2
             className={`text-md font-semibold uppercase text-gray-600 select-none`}
@@ -15,9 +15,9 @@ function Quadrant({ status, title, icon }) {
           </h2>
         </div>
 
-        {/* Task Placeholder */}
-        <div className="mb-2 w-full">
-          <p className="border border-gray-100 p-2 rounded">lorem ipsum</p>
+        {/* Task Item */}
+        <div className="w-full">
+          <TaskItem />
         </div>
 
         {/* Add Task */}
@@ -26,7 +26,7 @@ function Quadrant({ status, title, icon }) {
           name={status}
           onClick={(e) => console.log(e.target.name)}
         >
-          + Add Task
+          + New task
         </button>
       </div>
     </div>
