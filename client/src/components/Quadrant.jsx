@@ -1,10 +1,11 @@
 import React from "react";
 import TaskItem from "./TaskItem";
+import { CirclePlus } from "lucide-react";
 
 function Quadrant({ status, title, icon }) {
   return (
     <div className="bg-white border-gray-100 border p-4 rounded-lg">
-      <div className="flex flex-col items-start gap-3">
+      <div className="flex flex-col items-start gap-4">
         {/* Header */}
         <div className="flex gap-2 items-center w-full">
           {icon}
@@ -22,11 +23,16 @@ function Quadrant({ status, title, icon }) {
 
         {/* Add Task */}
         <button
-          className="hover:underline hover:text-blue-400"
+          type="button"
           name={status}
           onClick={(e) => console.log(e.target.name)}
+          className="flex items-center justify-center gap-2 w-full p-1 rounded bg-gray-100 text-gray-800 font-semibold transition-colors hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-400"
         >
-          + New task
+          <span className="tracking-wide">New Task</span>
+          <CirclePlus
+            className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"
+            aria-hidden="true"
+          />
         </button>
       </div>
     </div>
