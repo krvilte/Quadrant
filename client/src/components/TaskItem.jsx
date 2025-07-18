@@ -1,6 +1,6 @@
+import { useState, useRef, useEffect } from "react";
 import { Circle, GripVertical, Ellipsis } from "lucide-react";
 import TaskNavigation from "./TaskNavigation";
-import { useState, useRef, useEffect } from "react";
 
 const TaskItem = ({
   title = "Untitled Task",
@@ -63,7 +63,7 @@ const TaskItem = ({
             }}
           />
           {open && (
-            <div className="absolute right-0 mt-1 z-50">
+            <div className="absolute mt-1 z-50">
               <TaskNavigation
                 options={navigationOptions}
                 onClose={() => setOpen(false)}

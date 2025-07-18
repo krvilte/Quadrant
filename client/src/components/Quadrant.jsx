@@ -32,11 +32,11 @@ function Quadrant({ status, title, icon }) {
             type="button"
             name={status}
             onClick={() => setOpen((prev) => !prev)}
-            className="flex items-center justify-center gap-2 w-full p-1 rounded bg-gray-100 text-gray-800 font-semibold transition-colors hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-400"
+            className="flex items-center justify-center gap-2 w-full px-4 py-2 text-sm rounded bg-gray-100 text-gray-800 transition-colors hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-400"
           >
             <span className="tracking-wide">New Task</span>
             <CirclePlus
-              className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"
+              className="w-4 h-4 transition-transform duration-200 group-hover:scale-110"
               aria-hidden="true"
             />
           </button>

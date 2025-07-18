@@ -1,6 +1,6 @@
 function TaskNavigation({ options, onClose }) {
   return (
-    <div className="min-w-[140px] rounded-md border border-gray-100 bg-white shadow-md overflow-hidden">
+    <div className="rounded-md border border-gray-100 bg-white shadow-md overflow-hidden">
       {options.map((o, i) => (
         <div
           key={i}
