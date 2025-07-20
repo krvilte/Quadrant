@@ -1,17 +1,17 @@
-function TaskNavigation({ options, onClose }) {
+function TaskNavigation({ options = [], onClose }) {
   return (
-    <div className="rounded-md border border-gray-100 bg-white shadow-md overflow-hidden">
-      {options.map((o, i) => (
-        <div
-          key={i}
+    <div className="w-20 rounded-md border border-gray-200 bg-white shadow-lg overflow-hidden">
+      {options.map((option, index) => (
+        <button
+          key={index}
           onClick={() => {
-            o.onClick();
+            option.onClick();
             onClose();
           }}
-          className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-700 hover:text-white cursor-pointer"
+          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-black transition-all"
         >
-          {o.name}
-        </div>
+          {option.name}
+        </button>
       ))}
     </div>
   );

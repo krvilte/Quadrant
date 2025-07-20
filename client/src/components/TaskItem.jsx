@@ -2,16 +2,13 @@ import { useState, useRef, useEffect } from "react";
 import { Circle, GripVertical, Ellipsis } from "lucide-react";
 import TaskNavigation from "./TaskNavigation";
 
-const TaskItem = ({
-  title = "Untitled Task",
-  description = "",
-  priority = "medium",
-  dueDate = "",
-}) => {
+const TaskItem = ({ taskData }) => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
-  // Close on outside click
+  const { title, priority, status } = taskData;
+
+  // Close menu on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -40,20 +37,23 @@ const TaskItem = ({
   ];
 
   return (
-    <div className="relative flex flex-col gap-2 w-full p-3 rounded hover:bg-gray-100 transition-all group cursor-pointer border border-gray-100">
-      {/* Top Row */}
-      <div className="flex justify-between items-start">
+    <div className="relative flex flex-col w-full p-3 rounded-lg border border-gray-200 bg-white shadow-sm hover:bg-gray-50 transition-all group cursor-pointer">
+      {/* Top Row: Title & Menu */}
+      <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-5 h-5">
-            <Circle className="text-gray-400 group-hover:hidden" />
-            <GripVertical className="text-gray-400 hidden group-hover:inline cursor-grab" />
+          {/* Drag or Complete Icon */}
+          <div className="w-5 h-5 flex items-center justify-center text-gray-400">
+            <Circle className="group-hover:hidden block" />
+            <GripVertical className="hidden group-hover:block cursor-grab" />
           </div>
-          <span className="text-[15px] text-gray-800 font-medium select-none line-clamp-1">
+
+          {/* Task Title */}
+          <span className="text-sm font-medium text-gray-800 line-clamp-1 select-none">
             {title}
           </span>
         </div>
 
-        {/* Menu Icon */}
+        {/* Action Menu */}
         <div className="relative" ref={menuRef}>
           <Ellipsis
             className="w-5 h-5 text-gray-400 hover:text-gray-600 transition-colors"
@@ -61,9 +61,10 @@ const TaskItem = ({
               e.stopPropagation();
               setOpen((prev) => !prev);
             }}
+            aria-label="Task options"
           />
           {open && (
-            <div className="absolute mt-1 z-50">
+            <div className="absolute right-0 mt-1 z-50">
               <TaskNavigation
                 options={navigationOptions}
                 onClose={() => setOpen(false)}
@@ -73,27 +74,23 @@ const TaskItem = ({
         </div>
       </div>
 
-      {/* Description */}
-      {description && (
-        <p className="text-sm text-gray-600 ml-8 pr-2 line-clamp-2">
-          {description}
-        </p>
-      )}
-
-      {/* Bottom Row */}
-      <div className="flex justify-between items-center text-xs text-gray-500 ml-8">
+      {/* Bottom Row: Status & Priority */}
+      <div className="flex items-center gap-2 text-xs mt-2 ml-8 text-gray-500">
+        {/* Priority Badge */}
         <span
-          className={`px-2 py-0.5 rounded-full font-medium capitalize ${
+          className={`px-2 py-0.5 rounded-full capitalize font-medium ${
             {
               high: "bg-red-100 text-red-700",
               medium: "bg-yellow-100 text-yellow-700",
               low: "bg-green-100 text-green-700",
-            }[priority] || "bg-gray-100 text-gray-600"
+            }[priority] || "bg-gray-200 text-gray-600"
           }`}
         >
           {priority}
         </span>
-        {dueDate && <span>📅 {dueDate}</span>}
+
+        {/* Status Tag */}
+        <span className="capitalize">{status}</span>
       </div>
     </div>
   );
