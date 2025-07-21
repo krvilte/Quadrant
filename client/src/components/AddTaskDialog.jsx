@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useTaskStore from "../app/TaskStore";
 
 const formFields = [
   {
@@ -33,11 +34,15 @@ const formFields = [
 ];
 
 function AddTaskDialog({ status = "do", onClose }) {
+  const addTask = useTaskStore((state) => state.addTask);
+
   const [formData, setFormData] = useState({
+    id: Date.now(),
     title: "",
     description: "",
     priority: "medium",
     dueDate: "",
+    quadrant: status,
   });
 
   const handleChange = (e) => {
@@ -47,7 +52,7 @@ function AddTaskDialog({ status = "do", onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ ...formData, status });
+    addTask(formData);
     onClose();
   };
 
@@ -118,6 +123,7 @@ function AddTaskDialog({ status = "do", onClose }) {
             </button>
             <button
               type="submit"
+              onClick={handleSubmit}
               className="px-4 py-2 text-sm bg-gray-800 text-white rounded hover:bg-gray-700"
             >
               Save Task

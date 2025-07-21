@@ -8,8 +8,6 @@ function Quadrant({ status, title, icon }) {
   const [open, setOpen] = useState(false);
   const { tasks } = useTaskStore();
 
-  console.log(typeof tasks);
-
   return (
     <>
       {open && <AddTaskDialog status={status} onClose={() => setOpen(false)} />}
