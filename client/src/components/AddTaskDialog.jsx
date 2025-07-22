@@ -43,6 +43,7 @@ function AddTaskDialog({ status = "do", onClose }) {
     priority: "medium",
     dueDate: "",
     quadrant: status,
+    status: "pending",
   });
 
   const handleChange = (e) => {
@@ -53,6 +54,7 @@ function AddTaskDialog({ status = "do", onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addTask(formData);
+    console.log(formData);
     onClose();
   };
 
