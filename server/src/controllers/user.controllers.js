@@ -13,7 +13,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All fields are required");
 
   // Check existing user
-  const existingUser = await User.findOne({ $or: [{ username, email }] });
+  const existingUser = await User.findOne({ $or: [{ username }, { email }] });
   if (existingUser)
     throw new ApiError(409, "User with email or password already exists");
 
@@ -26,9 +26,7 @@ export const registerUser = asyncHandler(async (req, res) => {
   });
 
   // Find registered user
-  const registeredUser = await User.findById(user._id).select(
-    "-password -refreshToken"
-  );
+  const registeredUser = await User.findById(user._id).select("-password");
 
   // Validate registered user
   if (!registeredUser) throw new ApiError(500, "Error while registering user");
