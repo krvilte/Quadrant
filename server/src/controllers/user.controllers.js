@@ -9,7 +9,7 @@ import User from "../models/user.model.js";
 export const registerUser = asyncHandler(async (req, res) => {
   const { fullName, username, email, password } = req.body;
 
-  if (!fullName && !username && !email && !password)
+  if (!fullName || !username || !email || !password)
     throw new ApiError(400, "All fields are required");
 
   // Check existing user
@@ -43,7 +43,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 // @route POST "/api/v1/users/login"
 // @access public
 export const loginUser = (req, res) => {
-  res.send("Login user");
+  const { email, username, password } = req.body;
 };
 
 // @desc Logout User
