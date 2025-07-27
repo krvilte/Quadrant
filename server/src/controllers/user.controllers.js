@@ -33,16 +33,39 @@ export const registerUser = asyncHandler(async (req, res) => {
 
   // Success response
   return res
-    .status(201)
+    .status(200)
     .json(new ApiResponse(200, "User registered successfully", registeredUser));
 });
 
 // @desc Login User
 // @route POST "/api/v1/users/login"
 // @access public
-export const loginUser = (req, res) => {
+export const loginUser = asyncHandler(async (req, res) => {
   const { email, username, password } = req.body;
-};
+
+  // Validate user input
+  if (!email && !username)
+    throw new ApiError(400, "Email or username is required");
+  if (!password) throw new ApiError(400, "Password is required");
+
+  // Validate existing user
+  const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+  if (!existingUser) throw new ApiError(404, "User not found");
+
+  // Validate password
+  const validPassword = await existingUser.comparePassword(password);
+  if (!validPassword) throw new ApiError(401, "Incorrect password");
+
+  const userData = {
+    id: existingUser._id,
+    username: existingUser.username,
+    email: existingUser.email,
+  };
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, "Logged in successfully", userData));
+});
 
 // @desc Logout User
 // @route POST "/api/v1/users/logout"
