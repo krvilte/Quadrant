@@ -80,7 +80,15 @@ export const loginUser = asyncHandler(async (req, res) => {
 // @route POST "/api/v1/users/logout"
 // @access public
 export const logoutUser = asyncHandler(async (req, res) => {
-  res.send("Logout user");
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .json(new ApiResponse(200, "Logout successful"));
 });
 
 // @desc Current User
