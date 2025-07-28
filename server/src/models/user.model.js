@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import bcrypt, { compare } from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const userSchema = new Schema({
   fullName: {
@@ -41,6 +42,18 @@ userSchema.pre("save", async function (next) {
 // Compare password
 userSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
+};
+
+// Generate access token
+userSchema.methods.generateAccessToken = async function () {
+  return jwt.sign(
+    {
+      id: this._id,
+      email: this.email,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "7d" }
+  );
 };
 
 const User = model("User", userSchema);

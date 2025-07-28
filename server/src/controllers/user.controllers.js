@@ -70,9 +70,9 @@ export const loginUser = asyncHandler(async (req, res) => {
 // @desc Logout User
 // @route POST "/api/v1/users/logout"
 // @access public
-export const logoutUser = (req, res) => {
+export const logoutUser = asyncHandler(async (req, res) => {
   res.send("Logout user");
-};
+});
 
 // @desc Current User
 // @route POST "/api/v1/users/current"
