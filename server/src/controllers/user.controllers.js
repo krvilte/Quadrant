@@ -56,15 +56,24 @@ export const loginUser = asyncHandler(async (req, res) => {
   const validPassword = await existingUser.comparePassword(password);
   if (!validPassword) throw new ApiError(401, "Incorrect password");
 
+  // Generate access token
+  const token = await existingUser.generateAccessToken();
+
   const userData = {
     id: existingUser._id,
     username: existingUser.username,
     email: existingUser.email,
   };
 
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+
   res
     .status(200)
-    .json(new ApiResponse(200, "Logged in successfully", userData));
+    .cookie("accessToken", accessToken, options)
+    .json(new ApiResponse(200, "Logged in successfully", { userData, token }));
 });
 
 // @desc Logout User
