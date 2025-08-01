@@ -72,7 +72,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
   res
     .status(200)
-    .cookie("accessToken", accessToken, options)
+    .cookie("accessToken", token, options)
     .json(new ApiResponse(200, "Logged in successfully", { userData, token }));
 });
 
@@ -94,6 +94,6 @@ export const logoutUser = asyncHandler(async (req, res) => {
 // @desc Current User
 // @route POST "/api/v1/users/current"
 // @access public
-export const currentUser = (req, res) => {
-  res.send("Current user");
-};
+export const currentUser = asyncHandler(async (req, res) => {
+  res.status(200).json(new ApiResponse(200, "Authorized user", req.user));
+});
