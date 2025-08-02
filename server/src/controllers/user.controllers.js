@@ -78,7 +78,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
 // @desc Logout User
 // @route POST "/api/v1/users/logout"
-// @access public
+// @access private
 export const logoutUser = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
@@ -92,8 +92,8 @@ export const logoutUser = asyncHandler(async (req, res) => {
 });
 
 // @desc Current User
-// @route POST "/api/v1/users/current"
-// @access public
+// @route GET "/api/v1/users/current"
+// @access private
 export const currentUser = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, "Authorized user", req.user));
 });
