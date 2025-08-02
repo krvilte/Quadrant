@@ -1,7 +1,7 @@
-import asyncHandler from "../utils/asyncHandler";
-import ApiError from "../utils/apiError";
-import ApiResponse from "../utils/apiResponse";
-import TaskModel from "../models/task.model";
+import asyncHandler from "../utils/asyncHandler.js";
+import ApiError from "../utils/apiError.js";
+import ApiResponse from "../utils/apiResponse.js";
+import TaskModel from "../models/task.model.js";
 
 // @desc Add Task
 // @route POST "/api/v1/tasks"
