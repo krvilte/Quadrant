@@ -7,7 +7,29 @@ import TaskModel from "../models/task.model.js";
 // @route POST "/api/v1/tasks"
 // @access private
 export const addTask = asyncHandler(async (req, res) => {
-  res.send("Add task");
+  const { title, description, priority, quadrant, dueDate } = req.body;
+
+  // List of required fields
+  const requiredFields = ["title", "priority", "quadrant", "dueDate"];
+  const missingFields = requiredFields.filter((field) => !req.body[field]);
+
+  if (missingFields.length) {
+    const message = `Missing required field(s): ${missingFields.join(", ")}.`;
+    throw new ApiError(400, message);
+  }
+
+  // Create task
+  const task = await TaskModel.create({
+    title,
+    description,
+    priority,
+    quadrant,
+    dueDate,
+    user: req.user.id,
+  });
+
+  if (!task) throw new ApiError(500, "Error while create the task");
+  res.status(200).json(new ApiResponse(200, "Task created successfully", task));
 });
 
 // @desc Get Tasks
@@ -20,7 +42,7 @@ export const getTasks = asyncHandler(async (req, res) => {
 // @desc Get Singlt Task
 // @route GET "/api/v1/tasks/:id"
 // @access private
-export const getSingleTasks = asyncHandler(async (req, res) => {
+export const getSingleTask = asyncHandler(async (req, res) => {
   res.send("Get single task");
 });
 
