@@ -47,7 +47,12 @@ export const getTasks = asyncHandler(async (req, res) => {
 // @route GET "/api/v1/tasks/:id"
 // @access private
 export const getSingleTask = asyncHandler(async (req, res) => {
-  res.send("Get single task");
+  const { id } = req.params;
+
+  const task = await TaskModel.findById(id);
+  if (!task) throw new ApiError(404, "Task not found");
+
+  res.status(200).json(new ApiResponse(200, "Success", task));
 });
 
 // @desc Edit Task
