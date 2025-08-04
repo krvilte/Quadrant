@@ -36,7 +36,11 @@ export const addTask = asyncHandler(async (req, res) => {
 // @route GET "/api/v1/tasks"
 // @access private
 export const getTasks = asyncHandler(async (req, res) => {
-  res.send("Get tasks");
+  const tasks = await TaskModel.find({ user: req.user.id }).sort({
+    createdAt: -1,
+  });
+
+  res.status(200).json(new ApiResponse(200, "Success", tasks));
 });
 
 // @desc Get Singlt Task
