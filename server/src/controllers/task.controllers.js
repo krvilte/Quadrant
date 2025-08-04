@@ -59,7 +59,29 @@ export const getSingleTask = asyncHandler(async (req, res) => {
 // @route PATCH "/api/v1/tasks/:id"
 // @access private
 export const editTask = asyncHandler(async (req, res) => {
-  res.send("Edit task");
+  const { id } = req.params;
+
+  const task = await TaskModel.findById(id);
+  if (!task) throw new ApiError(404, "Task not found");
+
+  const dataFields = [
+    "title",
+    "description",
+    "priority",
+    "quadrant",
+    "dueDate",
+  ];
+
+  dataFields.forEach((field) => {
+    if (req.body[field] !== undefined) {
+      task[field] = req.body[field];
+    }
+  });
+
+  const updatedTask = await task.save();
+  res
+    .status(200)
+    .json(new ApiResponse(200, "Task updated successfully", updatedTask));
 });
 
 // @desc Delete Task
