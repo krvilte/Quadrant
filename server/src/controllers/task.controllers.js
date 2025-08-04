@@ -88,5 +88,10 @@ export const editTask = asyncHandler(async (req, res) => {
 // @route DELETE "/api/v1/tasks/:id"
 // @access private
 export const deleteTask = asyncHandler(async (req, res) => {
-  res.send("Delete task");
+  const { id } = req.params;
+
+  const task = await TaskModel.findByIdAndDelete(id);
+  if (!task) throw new ApiError(404, "Task not found");
+
+  res.status(200).json(new ApiResponse(200, "Task deleted successfully"));
 });
